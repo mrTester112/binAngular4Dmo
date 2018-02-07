@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Welcome {{username}}</h1>
+  <h3>Please Enter the Otp</h3>
+  <form class="form">
+    <input type="text" placeholder="Enter the Otp" [(ngModel)]="otp" name="otp">
+    <button type="submit" (click)="confirmRegistration()" id="login-button">Confirm</button>
+    
+    <div style="position: relative;margin-top: 20px;"  (click)="resendCode()">Resend Code</div>
+    
+  </form>
+</div>

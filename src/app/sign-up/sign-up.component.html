@@ -1,0 +1,19 @@
+<!--<p><a routerLink="/home">Today's Date is : {{myDate  | amUtc | amDateFormat: 'YYYY-MM-DD HH:mm'}}</a></p>-->
+      <div class="container">
+        <h1>Welcome</h1>
+        
+        <form #myForm="ngForm" class="form">
+          <input type="text" placeholder="Username" [(ngModel)]="username" name="username" required>
+          <input type="text" placeholder="Mobile No." [(ngModel)]="mobilno" name="mobilno" required>
+          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+          <button type="submit" (click)="register()" id="login-button">Sign Up</button>
+
+          <div style="position: relative;margin-top: 20px;"  (click)="switchToLoginScreen()">Already Registered: Login Now</div>
+      
+        </form>
+      </div>
+    
+  
+      
+   
+       
