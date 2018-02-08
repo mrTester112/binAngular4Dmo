@@ -37,6 +37,7 @@ export class OtpComponent implements OnInit {
             alert("ERROR : "+JSON.stringify(err));
         } else {
             alert("SUCCESS : "+JSON.stringify(result));
+            this.router.navigate(['/login']); 
         }
     });
   }

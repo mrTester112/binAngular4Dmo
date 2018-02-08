@@ -5,6 +5,7 @@ import { CognitoUtil} from "../services/cognito.service";
 import { CognitoCallback} from "../services/cognito.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Globals } from '../common/globals';
+import * as moment from 'moment';  // use "npm install moment "
 
 @Component({
   selector: 'app-sign-up',
@@ -17,9 +18,9 @@ export class SignUpComponent implements CognitoCallback {
   // variables Declarations
   public showSignUpScreen = true;
   
-  username = 'Binod';
-  mobilno = '8826536055';
-  email = 'vmvivekmalik91@gmail.com';
+  username = '';
+  mobilno = '';
+  email = '';
   otp = '';
   usern = '';
   user = {};
@@ -46,6 +47,7 @@ export class SignUpComponent implements CognitoCallback {
   registers(callback:CognitoCallback) {
         this.showSignUpScreen = true;
         this.globas.defaultLoader = true;
+    
     this.user= {
         "mobile": "+91" + this.mobilno,
         "name": this.username,
@@ -71,7 +73,7 @@ export class SignUpComponent implements CognitoCallback {
         attributeList.push(new CognitoUserAttribute(dataEmail));
         attributeList.push(new CognitoUserAttribute(dataNickname));
         attributeList.push(new CognitoUserAttribute(dataPhoneNumber));
-        this.usern=this.mobilno+"_12dd7fchs8f";
+        this.usern=this.mobilno+moment().toISOString();
         this.globas.cognitoUserName = this.usern;
         this.globas.loginUserName = this.username;
     /* setTimeout(()=>{    //<<<---    using ()=> syntax
