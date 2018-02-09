@@ -1,11 +1,32 @@
-<div class="container">
+<!-- <div class="container">
   <h1>Welcome {{username}}</h1>
   <h3>Please Enter the Otp</h3>
-  <form class="form">
+  <form class="form" #otpForm="ngForm" (ngSubmit)="confirmRegistration()">
     <input type="text" placeholder="Enter the Otp" [(ngModel)]="otp" name="otp">
     <button type="submit" (click)="confirmRegistration()" id="login-button">Confirm</button>
     
     <div style="position: relative;margin-top: 20px;"  (click)="resendCode()">Resend Code</div>
     
   </form>
-</div>
+</div>  -->
+<ng4-loading-spinner [threshold]="1000" [template]="template" 
+[loadingText]="'Please wait...'" [zIndex]="999" ></ng4-loading-spinner>
+
+<div class="container">
+    <h1>Welcome {{username}}</h1>
+    <h3>Please Enter the Otp</h3>
+    <form class="form"  #myForm="ngForm" (ngSubmit)="confirmRegistration()">
+
+    <input type="text" placeholder="Enter the Otp" [(ngModel)]="otp" name="otp" required
+    pattern="[0-9]*"  #otpView="ngModel">
+  <div style=" margin-top: -10px; margin-bottom: 10px;" [hidden]="otpView.valid || otpView.pristine" class="alert alert-danger">
+     <div [hidden]="!otpView.hasError('required')">Otp is required</div>
+     <div [hidden]="!otpView.hasError('pattern')">Otp should be only numbers</div>
+  </div>
+  
+    <button type="submit" id="login-button" [disabled]="!myForm.form.valid">Confirm</button>
+    <div style="position: relative;margin-top: 20px;"  (click)="resendCode()">Resend Code</div>
+    
+   
+    </form>
+  </div> 

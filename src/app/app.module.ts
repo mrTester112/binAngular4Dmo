@@ -17,15 +17,17 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { OtpComponent } from './otp/otp.component';
 import { Globals } from './common/globals';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 
 
 const appRoutes : Routes = [
   {path:'*', component : AppComponent },
   {path:'home',component : HomeComponent},
-  {path:'login',component : LoginComponent},
-  {path:'signUp',component : SignUpComponent},
+  {path:'login', component : LoginComponent},
+  {path:'signUp', component : SignUpComponent},
   {path:'forgotPass',component : ForgotPasswordComponent},
-  {path:'otp',component : OtpComponent},
+  {path:'otp',  component : OtpComponent},
   { path: '**',   redirectTo: '/signUp', pathMatch: 'full' },
   { path: '',   redirectTo: '/login', pathMatch: 'full' }
   ]
@@ -46,7 +48,8 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [DemoService,CognitoUtil ,Globals],
   bootstrap: [AppComponent]

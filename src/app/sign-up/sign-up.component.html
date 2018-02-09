@@ -1,17 +1,44 @@
 <!--<p><a routerLink="/home">Today's Date is : {{myDate  | amUtc | amDateFormat: 'YYYY-MM-DD HH:mm'}}</a></p>-->
-      <div class="container">
+<ng4-loading-spinner [threshold]="1000" [template]="template" 
+[loadingText]="'Please wait...'" [zIndex]="999" ></ng4-loading-spinner>
+<div id="abc" class="container" *ngIf="loading">
         <h1>Welcome</h1>
         
-        <form #myForm="ngForm" class="form">
-          <input type="text" placeholder="Username" [(ngModel)]="username" name="username" required>
-          <input type="text" placeholder="Mobile No." [(ngModel)]="mobilno" name="mobilno" required>
-          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
-          <button type="submit" (click)="register()" id="login-button">Sign Up</button>
+        <form #myForm="ngForm" (ngSubmit)="register()" class="form">
+      <!-- User Name -->
+          <input type="text" placeholder="Username" [(ngModel)]="username" name="username" required
+           pattern="[a-zA-Z][a-zA-Z ]+" #name="ngModel">
+          <div style=" margin-top: -10px; margin-bottom: 10px;"  [hidden]="name.valid || name.pristine"  class="alert alert-danger">
+             <div [hidden]="!name.hasError('required')">Name is required</div>
+             <div [hidden]="!name.hasError('pattern')">Name must contain only alphabets</div>
+          </div>
+      <!-- Mobile Number -->
+          <input type="text" placeholder="Mobile No." [(ngModel)]="mobilno" name="mobilno" required
+            pattern="[0-9]*" minlength="10" maxlength="10" #mobile="ngModel">
+          <div style=" margin-top: -10px; margin-bottom: 10px;" [hidden]="mobile.valid || mobile.pristine" class="alert alert-danger">
+             <div [hidden]="!mobile.hasError('minlength')">Mobile should be of 10 digit</div>
+             <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+             <div [hidden]="!mobile.hasError('pattern')">Mobile number should be only numbers</div>
+          </div>
+      <!-- Email -->
+          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  #emailId="ngModel">
+          <div style=" margin-top: -10px; margin-bottom: 10px;" [hidden]="emailId.valid || emailId.pristine" class="alert alert-danger">
+             <div [hidden]="!emailId.hasError('required')">Email is required</div>
+             <div [hidden]="!emailId.hasError('pattern')">Email format should be <small><b>bin@abc.com</b></small></div>
+          </div>
+
+          <button type="submit"  id="login-button" [disabled]="!myForm.form.valid">Sign Up</button>
 
           <div style="position: relative;margin-top: 20px;"  (click)="switchToLoginScreen()">Already Registered: Login Now</div>
       
         </form>
       </div>
+
+      <div  class="container" *ngIf="!loading">
+          <h1>Welcome</h1>
+          <img width=300; src="../../assets/images/sign.png">
+        </div>
     
   
       
