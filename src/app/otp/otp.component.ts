@@ -17,6 +17,7 @@ export class OtpComponent implements CognitoCallback ,OnInit {
 
   otp = '';
   username = '';
+  template: string =`<img src="../.././assets/images/loader.gif">`
   
   constructor(private ng4LoadingSpinnerService: Ng4LoadingSpinnerService, @Inject(CognitoUtil) public cognitoUtil: CognitoUtil,private router: Router, private globals: Globals ) {  // pass for global valus
     this.username = globals.loginUserName; // assigning the value to the global variables
